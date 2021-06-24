@@ -105,7 +105,7 @@ class AdminController extends AbstractController
 
 
             $dompdf->stream("reclamo_".$reclamo->getId().".pdf", [
-                "Attachment" => false
+                "Attachment" => true
             ]);
         }
         catch (SchoolException $exception){
