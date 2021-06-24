@@ -75,11 +75,11 @@
 
                 </div>
                 <div class="row no-print">
-                    <div class=" ">
-                        <a class="btn btn-info  pull-right" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</a>
-                        <a class="btn btn-warning pull-right" style="margin-right: 5px;" href="{{ path('app_reclamacion_print',{'id':reclamo.id,'hash':reclamo.hash}) }}"><i class="fa fa-download"></i> Descargar PDF</a>
-                        <a class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> REGRESAR</a>
-                    </div>
+
+                        <button class="btn btn-info"  id="imprimir"><i class="fa fa-print"></i> Imprimir</button>
+                        <a class="btn btn-warning pull-right" href="{{ path('app_reclamacion_print',{'id':reclamo.id,'hash':reclamo.hash}) }}"><i class="fa fa-download"></i> Descargar PDF</a>
+                        <a class="btn btn-success pull-right" href="{{ path('app_index') }}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+
                 </div>
             </div>
 
@@ -102,5 +102,9 @@
 {% endblock %}
 {% block javascripts_footer %}
     {{ parent() }}
-
+    <script>
+        $('#imprimir').click(function (){
+            window.print();
+        });
+    </script>
 {% endblock %}
