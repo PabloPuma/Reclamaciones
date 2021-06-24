@@ -55,11 +55,9 @@ security:
         - { path: ^/favicon.ico$, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/cola, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/facturador, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/servidor, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/esclavo, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/request$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/send-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/check-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/reset, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: [ ROLE_USER] }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

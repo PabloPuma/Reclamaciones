@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Reclamacion;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,18 +26,14 @@ class ReclamacionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha', BirthdayType::class, array(
-                'widget'   => 'choice',
-                'label'    => 'Fecha',
-                'format'   => 'dd/MM/yyyy',
-                'required' => true,
-            ))
             ->add('nombres',TextType::class)
             ->add('apellido_paterno',TextType::class)
             ->add('apellido_materno',TextType::class)
+            ->add('celular',TelType::class)
+            ->add('email',EmailType::class)
             ->add('tipo_documento', ChoiceType::class, array(
-                'label'    => "Sexo",
-                'choices'  => array('DNI' => 'DNI', 'CE' => 'CE'),
+                'label'    => "Tipo de Documento",
+                'choices'  => array('DNI' => 1, 'CE' => 0,'RUC'=>6,'PASAPORTE'=>7),
                 'required' => true,
             ))
             ->add('documento', TextType::class, array(
@@ -44,17 +41,23 @@ class ReclamacionType extends AbstractType
                 'required' => true,
             ))
             ->add('bien_contratado', ChoiceType::class, array(
-                'label'    => "Bien contrattado",
-                'choices'  => array('PRODUCTO' => 'PRODUCTO', 'SERVICIO' => 'SERVICIO'),
+                'label'    => "Tipo",
+                'choices'  => array( 'SERVICIO' => 'SERVICIO','PRODUCTO' => 'PRODUCTO'),
                 'required' => true,
             ))
             ->add('descripcion',TextareaType::class)
             ->add('detalle_reclamo', ChoiceType::class, array(
-                'label'    => "Detalle de Reclamo",
+                'label'    => "Tipo",
                 'choices'  => array('RECLAMO' => 'RECLAMO', 'QUEJA' => 'QUEJA'),
                 'required' => true,
             ))
-            ->add('detalle',TextareaType::class)
+            ->add('detalle',TextareaType::class,array(
+                'label' => 'Detalle',
+                'attr'      => array(
+                    'cols' => '5',
+                    'rows' => '5'
+                ),
+            ))
         ;
     }
 

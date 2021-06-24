@@ -1,0 +1,84 @@
+{% extends "Default/layout.html.twig" %}
+
+{% block block %}
+            <center><h1>
+                LIBRO DE RECLAMACIONES VIRTUAL
+                </h1></center>
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Registrar nuevo reclamo</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {{ form_start(form) }}
+            <div class="x_panel col-md-12">
+                <div class="x_title">
+                    <h2>Datos Personales del reclamante</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-8">
+
+                    <div  class="col-md-4">
+                        {{ form_row(form.tipo_documento) }}
+                        {{ form_row(form.documento) }}
+                    </div>
+                    <div class="col-md-8">
+                        {{ form_row(form.nombres) }}
+                        <div  class="col-md-6">
+                            {{ form_row(form.apellido_paterno) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.apellido_materno) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div  class="col-md-12">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="col-md-12">
+                        {{ form_row(form.celular) }}
+
+                    </div>
+                </div>
+            </div>
+            <div class="x_panel col-md-12">
+                <div class="x_title">
+                    <h2>Identificación del bien o servicio contratado</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4">
+                        {{ form_row(form.bien_contratado) }}
+                </div>
+                <div class="col-md-8">
+                    {{ form_row(form.descripcion) }}
+
+                </div>
+            </div>
+            <div class="x_panel col-md-12">
+                <div class="x_title">
+                    <h2>Detalle de la reclamación</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.detalle_reclamo) }}
+                </div>
+                <div class="col-md-8">
+                    {{ form_row(form.detalle) }}
+                    <button type="submit" name="valider" class="btn btn-success" style="float: right"><i class="fa fa-send"></i> REGISTRAR</button>
+
+                </div>
+
+            </div>
+            <div class="x_content">
+                <div class="ln_solid"></div>
+                <div class="item form-group" style="float: right">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <a class="btn btn-danger" href="{{ sistema.link | default("#") | upper }}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

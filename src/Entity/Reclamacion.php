@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReclamacionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 /**
  * @ORM\Entity(repositoryClass=ReclamacionRepository::class)
@@ -20,9 +21,9 @@ class Reclamacion
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_nacimiento", type="datetime")
+     * @ORM\Column(name="fecha_registro", type="datetime")
      */
-    private $fecha;
+    private $fecha_registro;
 
     /**
      * @var string
@@ -54,7 +55,19 @@ class Reclamacion
      * @ORM\Column(name="documento", type="string", length=20)
      */
     private $documento;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
+     */
+    private $email;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="celular1", type="string", length=20, nullable=true)
+     */
+    private $celular;
     /**
      * @ORM\Column(name="bien_contratado", type="string", length=20)
      */
@@ -79,19 +92,24 @@ class Reclamacion
      */
     private $detalle;
 
+    public function __construct()
+    {
+        $this->fecha_registro = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFecha(): ?\DateTimeInterface
+    public function getFechaRegistro(): ?\DateTimeInterface
     {
-        return $this->fecha;
+        return $this->fecha_registro;
     }
 
-    public function setFecha(\DateTimeInterface $fecha): self
+    public function setFechaRegistro(\DateTimeInterface $fecha): self
     {
-        $this->fecha = $fecha;
+        $this->fecha_registro = $fecha;
 
         return $this;
     }
@@ -203,4 +221,37 @@ class Reclamacion
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail( $email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCelular()
+    {
+        return $this->celular;
+    }
+
+    /**
+     * @param string $celular
+     */
+    public function setCelular( $celular)
+    {
+        $this->celular = $celular;
+    }
+
 }
