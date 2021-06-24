@@ -54,7 +54,7 @@ security:
         - { path: ^/js, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/favicon.ico$, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/cola, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/facturador, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/admin, role: ROLE_USER}
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/request$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/send-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }

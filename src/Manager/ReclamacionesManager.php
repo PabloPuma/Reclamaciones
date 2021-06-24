@@ -35,12 +35,22 @@ class ReclamacionesManager
         return $reclamacion;
     }
 
+
     public function addReclamacion(Reclamacion  $reclamacion){
+        $reclamacion->setHash(md5($reclamacion->getDocumento()));
         $this->em->persist($reclamacion);
         $this->em->flush();
     }
     public function updateReclamacion(Reclamacion  $reclamacion){
         $this->em->persist($reclamacion);
         $this->em->flush();
+    }
+    public function searchByIdHash($id,$hash){
+        /** @var Reclamacion $reclamo */
+        $reclamo = $this->em->getRepository(Reclamacion::class)->find($id);
+        if(md5($reclamo->getDocumento())!=$hash){
+            throw new SchoolException("TOKEN INCORRECTO");
+        }
+        return $reclamo;
     }
 }

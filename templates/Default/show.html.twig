@@ -1,0 +1,106 @@
+{% extends "Default/layout.html.twig" %}
+
+{% block block %}
+    <style>
+        body{
+            font-size: 16px;
+        }
+    </style>
+    <section class="content invoice">
+
+        <div class="row">
+            <div class="invoice-header">
+                <h1>
+                    <i class="fa fa-globe"></i> RECLAMO VIRTUAL N° {{ reclamo.id }}
+
+                </h1>
+            </div>
+
+        </div>
+
+        <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+                Reclamante
+                <address>
+                    <strong>{{ reclamo.NombreCompletoApellidosPrimero}}</strong>
+                    <br>{{ reclamo.tipoDocumento | format_tipo_cliente }}
+                    <br>N° {{ reclamo.documento }}
+                    <br>Celular: {{ reclamo.celular }}
+                    <br>Email: {{ reclamo.email | upper }}
+                </address>
+            </div>
+
+{#            <div class="col-sm-4 invoice-col">#}
+{#                To#}
+{#                <address>#}
+{#                    <strong>John Doe</strong>#}
+{#                    <br>795 Freedom Ave, Suite 600#}
+{#                    <br>New York, CA 94107#}
+{#                    <br>Phone: 1 (804) 123-9876#}
+{#                    <br>Email: jon@ironadmin.com#}
+{#                </address>#}
+{#            </div>#}
+
+            <div class="col-sm-4 invoice-col">
+
+                <br>
+                <br>
+                <b>Fecha y hora:</b> {{ reclamo.fechaRegistro |format_datetime('full', 'short') | upper }}
+                <br>
+                <b>Hash:  {{ reclamo.hash }}</b>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <p class="lead">DESCRIPCIÓN DE LA OPERACIÓN</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th style="width:50%">TIPO</th>
+                            <td>{{ reclamo.bienContratado }}</td>
+                        </tr>
+                        <tr>
+                            <th>DETALLE</th>
+                            <td>{{ reclamo.descripcion }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="row no-print">
+                    <div class=" ">
+                        <a class="btn btn-info  pull-right" onclick="window.print();"><i class="fa fa-print"></i> Imprimir</a>
+                        <a class="btn btn-warning pull-right" style="margin-right: 5px;" href="{{ path('app_reclamacion_print',{'id':reclamo.id,'hash':reclamo.hash}) }}"><i class="fa fa-download"></i> Descargar PDF</a>
+                        <a class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                                <p class="lead"> {{ reclamo.detalleReclamo| upper }}</p>
+                                <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                                        {{ reclamo.detalle }}
+                                </p>
+
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+
+
+{% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+
+{% endblock %}

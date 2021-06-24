@@ -11,6 +11,12 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
  */
 class Reclamacion
 {
+    const PASAPORTE         =  7;
+    const DNI               =   1;
+    const RUC               =   6;
+    const CE            =   0;
+    const OTROS =-1;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -58,14 +64,14 @@ class Reclamacion
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, unique=true, nullable=true)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="celular1", type="string", length=20, nullable=true)
+     * @ORM\Column(name="celular1", type="string", length=20, nullable=false)
      */
     private $celular;
     /**
@@ -92,6 +98,13 @@ class Reclamacion
      */
     private $detalle;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hash", type="string", length=255)
+     */
+    private $hash;
+
     public function __construct()
     {
         $this->fecha_registro = new \DateTime();
@@ -100,6 +113,11 @@ class Reclamacion
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNombreCompletoApellidosPrimero()
+    {
+        return $this->getApellidoPaterno() . " " . $this->getApellidoMaterno() . ", " . $this->getNombres();
     }
 
     public function getFechaRegistro(): ?\DateTimeInterface
@@ -253,5 +271,22 @@ class Reclamacion
     {
         $this->celular = $celular;
     }
+
+    /**
+     * @return string
+     */
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @param string $hash
+     */
+    public function setHash(string $hash): void
+    {
+        $this->hash = $hash;
+    }
+
 
 }

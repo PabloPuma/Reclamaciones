@@ -9,3 +9,5 @@ twig:
         long_date_format: 'l j \d\e F \d\e Y'
         grupo_name : '%env(GRUPO_NAME)%'
         servidor :  '%env(SERVIDOR)%'
+        app_folder: '%kernel.project_dir%/public/media'
+        url: 'null'

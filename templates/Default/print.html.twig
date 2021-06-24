@@ -1,0 +1,83 @@
+{% extends "admin/base_print.html.twig" %}
+
+{% block block %}
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <center><h3 class="fx-subsubheader"><b>RECLAMO VIRTUAL N° {{ reclamo.id }}</b></h3></center>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b>Datos del reclamante</b></h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-condensed fx-record-properties-table">
+                    <tbody>
+                    <tr>
+                        <th>Nombres y apellidos: </th>
+                        <td>{{ reclamo.NombreCompletoApellidosPrimero}}
+                        </td>
+
+                        <th>{{ reclamo.tipoDocumento | format_tipo_cliente }}</th>
+                        <td>N° {{ reclamo.documento }}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular: </th>
+                        <td> {{ reclamo.celular }}</td>
+
+                        <th>Email:</th>
+                        <td>{{ reclamo.email | upper }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha y hora:</th> <td>
+                            {{ reclamo.fechaRegistro |format_datetime('full', 'short') | upper }}
+                        </td>
+                        <th>Hash:  </th>
+                        <td>{{ reclamo.hash }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><b>DESCRIPCIÓN DE LA OPERACIÓN</b></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <table class="table table-hover table-condensed fx-record-properties-table">
+                            <tbody>
+                            <tr>
+                                <th style="width:50%">TIPO</th>
+                                <td>{{ reclamo.bienContratado }}</td>
+                            </tr>
+                            <tr>
+                                <th>DETALLE</th>
+                                <td>{{ reclamo.descripcion }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                        <div class="col-md-6">
+                            <p class="lead"> {{ reclamo.detalleReclamo| upper }}</p>
+                            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                                {{ reclamo.detalle }}
+                            </p>
+                        </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+<footer>
+    Este documento es la representación impresa de su reclamo registrados  en nuestra plataforma.
+</footer>
+
+
+{% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+
+{% endblock %}

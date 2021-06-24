@@ -5,6 +5,7 @@ namespace App\Twig;
 
 
 use App\Entity\Cliente;
+use App\Entity\Reclamacion;
 use App\Entity\Usuario;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -107,11 +108,13 @@ class FxExtension extends AbstractExtension{
     {
         $string = strtolower($string);
 
-        if ($string == Cliente::DNI ) return "DNI";
-        else if ($string == Cliente::RUC) return "RUC";
+        if ($string == Reclamacion::DNI ) return "DNI";
+        else if ($string == Reclamacion::RUC) return "RUC";
+        else if ($string == Reclamacion::CE) return "CARNET DE EXTRANJERIA";
+        else if ($string == Reclamacion::PASAPORTE) return "PASAPORTE";
 
 
-        return $string;
+        return "OTROS";
     }
     public function formatConta($bool){
         return $bool==true?"SI":"NO";
