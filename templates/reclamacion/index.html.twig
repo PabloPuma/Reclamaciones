@@ -1,0 +1,155 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5>
+                    {{ project_name | upper }}
+                </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            LISTA DE RECLAMACIONES</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a href="{{ path('reclamacion_new') }}" class="btn btn-success">NUEVO</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            {#							<form action="{{ path('app_admin_groupaction_user') }}" id="grpaction" method="post" name="grpaction">#}
+                            {#								<div class="form-group form-inline">#}
+                            {#									<select class="form-control" name="action" required id="action_select">#}
+                            {#										<option value="">#}
+                            {#											ACCIONES</option>#}
+                            {#										<option value="{{"backend.user.deactivate"|trans }}">#}
+                            {#											Deshabilitar</option>#}
+                            {#										<option value="{{"backend.user.Activate"|trans }}">#}
+                            {#											Habilitar</option>#}
+                            {#										<option value="{{"backend.user.delete"|trans }}">#}
+                            {#											Eliminar</option>#}
+                            {#									</select>#}
+                            {#									<button class="btn btn-primary" type="submit">Ejecutar</button>#}
+                            {#								</div>#}
+
+                            {#							</form>#}
+                            <table id="listaReclamaciones" class="display table table-striped table-bordered dataminetables">
+                                <thead>
+                                <th><input type="checkbox" id="select_all" name="select_all"></th>
+                                    <th>Fecha</th>
+                                    <th>Nombres</th>
+                                    <th>Apellido_paterno</th>
+                                    <th>Apellido_materno</th>
+                                    <th>Tipo_documento</th>
+                                    <th>Documento</th>
+                                    <th>Bien_contratado</th>
+                                    <th>Descripcion</th>
+                                    <th>Detalle_reclamo</th>
+                                    <th>Detalle</th>
+                                    <th>actions</th>
+                                </thead>
+                                <tbody>
+{#                                {% for user in users|filter(user => not user.deleted)  %}#}
+                                {% for reclamacion in reclamacions %}
+                                    <tr>
+                                        <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ reclamacion.id }}"></td>
+                                        <td>{{ reclamacion.fecha ? reclamacion.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ reclamacion.nombres }}</td>
+                                        <td>{{ reclamacion.apellidoPaterno }}</td>
+                                        <td>{{ reclamacion.apellidoMaterno }}</td>
+                                        <td>{{ reclamacion.tipoDocumento }}</td>
+                                        <td>{{ reclamacion.documento }}</td>
+                                        <td>{{ reclamacion.bienContratado }}</td>
+                                        <td>{{ reclamacion.descripcion }}</td>
+                                        <td>{{ reclamacion.detalleReclamo }}</td>
+                                        <td>{{ reclamacion.detalle }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{ path('reclamacion_edit', {'id': reclamacion.id}) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-primary" href="{{ path('reclamacion_show', {'id': reclamacion.id}) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+
+
+{#                                            {%  if user.valid %}#}
+{#                                                <a class="btn btn-success activate-link" href="{{ path('app_usuarios.change.valides', {'id': user.id}) }}">#}
+{#                                                    <i class="fa fa-check"></i>#}
+{#                                                </a>#}
+{#                                            {% else %}#}
+{#                                                <a class="btn btn-warning activate-link" href="{{ path('app_usuarios.change.valides', {'id': user.id}) }}">#}
+{#                                                    <i class="fa fa-times"></i>#}
+{#                                                </a>#}
+{#                                            {% endif %}#}
+
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+    <script>
+
+
+
+        $(document).on("click",".activate-link",function (e) {
+            /*$(".activate-link").click(function(e) {*/
+            e.preventDefault();
+            var btn = $(this);
+            var link = $(this).attr("href");
+            $.ajax({
+                url: link,
+                method: 'POST',
+                success: function(data){
+                    if(data.message=="success"){
+                        if(data.value==true){
+                            btn.removeClass("btn-success");
+                            btn.removeClass("btn-warning");
+                            btn.addClass("btn-success");
+                            btn.html("<i class=\"fa fa-check\"></i>");
+                            notif("success","Estado:","Activado");
+                        }else if(data.value==false) {
+                            btn.removeClass("btn-success");
+                            btn.removeClass("btn-warning");
+                            btn.addClass("btn-warning");
+                            btn.html("<i class=\"fa fa-times\"></i>");
+                            notif("warning","Estado:","Desactivado");
+                        }
+
+
+                    }else {
+                        notif("error","Error","Error interno del servidor.");
+                    }
+                },
+                error: function(xhr){
+                    notif("error","Error","Ha ocurrido un error inesperado.");
+                }
+            });
+        });
+
+
+    </script>
+
+{% endblock %}

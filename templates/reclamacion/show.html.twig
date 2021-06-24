@@ -1,0 +1,64 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <h1>Reclamacion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reclamacion.id }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ reclamacion.fecha ? reclamacion.fecha|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nombres</th>
+                <td>{{ reclamacion.nombres }}</td>
+            </tr>
+            <tr>
+                <th>Apellido_paterno</th>
+                <td>{{ reclamacion.apellidoPaterno }}</td>
+            </tr>
+            <tr>
+                <th>Apellido_materno</th>
+                <td>{{ reclamacion.apellidoMaterno }}</td>
+            </tr>
+            <tr>
+                <th>Tipo_documento</th>
+                <td>{{ reclamacion.tipoDocumento }}</td>
+            </tr>
+            <tr>
+                <th>Documento</th>
+                <td>{{ reclamacion.documento }}</td>
+            </tr>
+            <tr>
+                <th>Bien_contratado</th>
+                <td>{{ reclamacion.bienContratado }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ reclamacion.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Detalle_reclamo</th>
+                <td>{{ reclamacion.detalleReclamo }}</td>
+            </tr>
+            <tr>
+                <th>Detalle</th>
+                <td>{{ reclamacion.detalle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('reclamacion_index') }}">back to list</a>
+
+    <a href="{{ path('reclamacion_edit', {'id': reclamacion.id}) }}">edit</a>
+
+    {{ include('reclamacion/_delete_form.html.twig') }}
+{% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+
+{% endblock %}

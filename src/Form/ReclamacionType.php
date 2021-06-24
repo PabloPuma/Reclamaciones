@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Reclamacion;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+//use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\ChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+//use Symfony\Component\Form\FormBuilderInterface;
+//use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class ReclamacionType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('fecha', BirthdayType::class, array(
+                'widget'   => 'choice',
+                'label'    => 'Fecha',
+                'format'   => 'dd/MM/yyyy',
+                'required' => true,
+            ))
+            ->add('nombres',TextType::class)
+            ->add('apellido_paterno',TextType::class)
+            ->add('apellido_materno',TextType::class)
+            ->add('tipo_documento', ChoiceType::class, array(
+                'label'    => "Sexo",
+                'choices'  => array('DNI' => 'DNI', 'CE' => 'CE'),
+                'required' => true,
+            ))
+            ->add('documento', TextType::class, array(
+                'label'    => "Documento de identidad",
+                'required' => true,
+            ))
+            ->add('bien_contratado', ChoiceType::class, array(
+                'label'    => "Bien contrattado",
+                'choices'  => array('PRODUCTO' => 'PRODUCTO', 'SERVICIO' => 'SERVICIO'),
+                'required' => true,
+            ))
+            ->add('descripcion',TextareaType::class)
+            ->add('detalle_reclamo', ChoiceType::class, array(
+                'label'    => "Detalle de Reclamo",
+                'choices'  => array('RECLAMO' => 'RECLAMO', 'QUEJA' => 'QUEJA'),
+                'required' => true,
+            ))
+            ->add('detalle',TextareaType::class)
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Reclamacion::class,
+        ]);
+    }
+}
