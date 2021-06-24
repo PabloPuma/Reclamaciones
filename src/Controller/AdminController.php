@@ -49,6 +49,7 @@ class AdminController extends AbstractController
             $this->reclamacionesManager->addReclamacion($reclamacion);
 
             return $this->redirectToRoute('app_reclamacion_show',array(
+                'id'=>$reclamacion->getId(),
                 'hash' => $reclamacion->getHash()
             ));
         }
