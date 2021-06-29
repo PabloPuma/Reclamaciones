@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reclamacion;
 use App\Form\ReclamacionType;
+use App\Form\RespuestaType;
 use App\Manager\ReclamacionesManager;
 use App\Manager\UsuarioManager;
 use App\Repository\ReclamacionRepository;
@@ -38,40 +39,21 @@ class ReclamacionController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="reclamacion_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $reclamacion = $this->reclamacionesManager->newReclamacion();
-        $form = $this->createForm(ReclamacionType::class, $reclamacion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->reclamacionesManager->addReclamacion($reclamacion);
-
-            return $this->redirectToRoute('reclamacion_index');
-        }
-
-        return $this->render('reclamacion/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="reclamacion_show", methods={"GET"})
      */
-    public function show(Reclamacion $reclamacion): Response
+    public function showAction(Reclamacion $reclamacion): Response
     {
         return $this->render('reclamacion/show.html.twig', [
-            'reclamacion' => $reclamacion,
+            'reclamo' => $reclamacion,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="reclamacion_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Reclamacion $reclamacion): Response
+    public function editAction(Request $request, Reclamacion $reclamacion): Response
     {
         $form = $this->createForm(ReclamacionType::class, $reclamacion);
         $form->handleRequest($request);
@@ -79,7 +61,7 @@ class ReclamacionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->reclamacionesManager->updateReclamacion($reclamacion);
 
-            return $this->redirectToRoute('reclamacion_index');
+            return $this->redirectToRoute('reclamacion_show',array('id'=>$reclamacion->getId()));
         }
 
         return $this->render('reclamacion/edit.html.twig', [
@@ -87,18 +69,24 @@ class ReclamacionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/{id}", name="reclamacion_delete", methods={"POST"})
+     * @Route("/{id}/responder", name="reclamacion_responder", methods={"GET","POST"})
      */
-    public function delete(Request $request, Reclamacion $reclamacion): Response
+    public function responderAction(Request $request, Reclamacion $reclamacion): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reclamacion->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($reclamacion);
-            $entityManager->flush();
+        $form = $this->createForm(RespuestaType::class, $reclamacion);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->reclamacionesManager->addRepuesta($reclamacion);
+
+            return $this->redirectToRoute('reclamacion_show',array('id'=>$reclamacion->getId()));
         }
 
-        return $this->redirectToRoute('reclamacion_index');
+        return $this->render('reclamacion/respuesta.html.twig', [
+            'reclamo' => $reclamacion,
+            'form' => $form->createView(),
+        ]);
     }
+
 }

@@ -17,6 +17,8 @@ class Reclamacion
     const CE            =   0;
     const OTROS =-1;
 
+    const PENDIENTE = 0;
+    const OK = 1;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -82,7 +84,7 @@ class Reclamacion
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=150)
+     * @ORM\Column(name="descripcion", type="text")
      */
     private $descripcion;
 
@@ -94,7 +96,7 @@ class Reclamacion
     /**
      * @var string
      *
-     * @ORM\Column(name="detalle", type="string", length=250)
+     * @ORM\Column(name="detalle", type="text")
      */
     private $detalle;
 
@@ -104,10 +106,38 @@ class Reclamacion
      * @ORM\Column(name="hash", type="string", length=255)
      */
     private $hash;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="estado", type="boolean")
+     */
+    private $estado;
+
+    /**
+     * @var Usuario
+     *
+     * @ORM\ManyToOne(targetEntity="Usuario", fetch="EAGER" )
+     * @ORM\JoinColumn(name="supervisor_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $supervisor;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="respuesta", type="text",nullable=true)
+     */
+    private $respuesta;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_respuesta", type="datetime",nullable=true)
+     */
+    private $fecha_respuesta;
 
     public function __construct()
     {
         $this->fecha_registro = new \DateTime();
+        $this->estado = Reclamacion::PENDIENTE;
     }
 
     public function getId(): ?int
@@ -286,6 +316,70 @@ class Reclamacion
     public function setHash(string $hash): void
     {
         $this->hash = $hash;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * @param bool $estado
+     */
+    public function setEstado($estado): void
+    {
+        $this->estado = $estado;
+    }
+
+    /**
+     * @return Usuario
+     */
+    public function getSupervisor(): Usuario
+    {
+        return $this->supervisor;
+    }
+
+    /**
+     * @param Usuario $supervisor
+     */
+    public function setSupervisor(Usuario $supervisor): void
+    {
+        $this->supervisor = $supervisor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRespuesta(): string
+    {
+        return $this->respuesta;
+    }
+
+    /**
+     * @param string $respuesta
+     */
+    public function setRespuesta(string $respuesta): void
+    {
+        $this->respuesta = $respuesta;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaRespuesta(): \DateTime
+    {
+        return $this->fecha_respuesta;
+    }
+
+    /**
+     * @param \DateTime $fecha_respuesta
+     */
+    public function setFechaRespuesta(\DateTime $fecha_respuesta): void
+    {
+        $this->fecha_respuesta = $fecha_respuesta;
     }
 
 

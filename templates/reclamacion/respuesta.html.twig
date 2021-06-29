@@ -16,11 +16,11 @@
                 <div class="x_panel">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Registrar nuevo reclamo</h2>
+                            <h2>Registrar  respuesta del reclamo N° {{ reclamo.id }}</h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            {{ form_start(form) }}
+
                             <div class="x_panel col-md-12">
                                 <div class="x_title">
                                     <h2>Datos Personales del reclamante</h2>
@@ -29,25 +29,25 @@
                                 <div class="col-md-8">
 
                                     <div  class="col-md-4">
-                                        {{ form_row(form.tipo_documento) }}
-                                        {{ form_row(form.documento) }}
+                                        {{reclamo.tipoDocumento}}
+                                        {{reclamo.documento}}
                                     </div>
                                     <div class="col-md-8">
-                                        {{ form_row(form.nombres) }}
+                                        {{reclamo.nombres}}
                                         <div  class="col-md-6">
-                                            {{ form_row(form.apellido_paterno) }}
+                                            {{reclamo.apellidoPaterno}}
                                         </div>
                                         <div class="col-md-6">
-                                            {{ form_row(form.apellido_materno) }}
+                                            {{reclamo.apellidoMaterno}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div  class="col-md-12">
-                                        {{ form_row(form.email) }}
+                                        {{reclamo.email}}
                                     </div>
                                     <div class="col-md-12">
-                                        {{ form_row(form.celular) }}
+                                        {{reclamo.celular}}
 
                                     </div>
                                 </div>
@@ -58,10 +58,10 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    {{ form_row(form.bien_contratado) }}
+                                    {{reclamo.bienContratado}}
                                 </div>
                                 <div class="col-md-8">
-                                    {{ form_row(form.descripcion) }}
+                                    {{reclamo.descripcion}}
 
                                 </div>
                             </div>
@@ -71,25 +71,25 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    {{ form_row(form.detalle_reclamo) }}
+                                    {{reclamo.detalleReclamo}}
                                 </div>
                                 <div class="col-md-8">
-                                    {{ form_row(form.detalle) }}
-                                    <button type="submit" name="valider" class="btn btn-success" style="float: right"><i class="fa fa-send"></i> REGISTRAR</button>
-
+                                    {{reclamo.detalle}}
                                 </div>
-
                             </div>
-                            <div class="x_content">
-                                <div class="ln_solid"></div>
-                                <div class="item form-group" style="float: right">
-                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <a class="btn btn-danger" href="{{ sistema.link | default("http://icit.edu.pe") | upper }}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
-                                    </div>
+                            <div class="x_panel col-md-12">
+                                <div class="x_title">
+                                    <h2>Detalle de la respuesta</h2>
+                                    <div class="clearfix"></div>
                                 </div>
+                                {{ form_start(form) }}
+                                {{ form_row(form.respuesta) }}
+                                <button class="btn btn-success">{{ button_label|default('Registrar') }}</button>
                                 {{ form_end(form) }}
                             </div>
-                        </div>
+
+
+                    </div>
 
                 </div>
             </div>

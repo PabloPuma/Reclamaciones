@@ -20,9 +20,9 @@
                         <h2>
                             LISTA DE RECLAMACIONES</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <a href="{{ path('reclamacion_new') }}" class="btn btn-success">NUEVO</a>
-                            </li>
+{#                            <li>#}
+{#                                <a href="{{ path('reclamacion_new') }}" class="btn btn-success">NUEVO</a>#}
+{#                            </li>#}
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -33,33 +33,37 @@
                                 <thead>
                                 <th>N°</th>
                                     <th>Fecha</th>
-                                    <th>Nombres</th>
-                                    <th>Apellido_paterno</th>
-                                    <th>Apellido_materno</th>
-                                    <th>Tipo_documento</th>
-                                    <th>Documento</th>
-                                    <th>Bien_contratado</th>
-                                    <th>Descripcion</th>
-                                    <th>Detalle_reclamo</th>
-                                    <th>Detalle</th>
-                                    <th>actions</th>
+                                    <th width="15%">Nombres</th>
+                                    <th width="5%">Documento</th>
+                                    <th width="5%">N° documento</th>
+                                    <th width="5%">Bien/Servicio</th>
+                                    <th width="20%">Descripcion</th>
+                                    <th>Tipo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
                                 </thead>
                                 <tbody>
                                 {% for reclamacion in reclamacions %}
                                     <tr>
                                         <td>{{ loop.index }}</td>
-                                        <td>{{ reclamacion.fecha ? reclamacion.fecha|date('Y-m-d H:i:s') : '' }}</td>
-                                        <td>{{ reclamacion.nombres }}</td>
-                                        <td>{{ reclamacion.apellidoPaterno }}</td>
-                                        <td>{{ reclamacion.apellidoMaterno }}</td>
-                                        <td>{{ reclamacion.tipoDocumento }}</td>
+                                        <td>{{ reclamacion.fechaRegistro ? reclamacion.fechaRegistro|date('Y-m-d H:i:s') : '' }}</td>
+                                        <td>{{ reclamacion.NombreCompletoApellidosPrimero }}</td>
+                                        <td>{{ reclamacion.tipoDocumento  | format_tipo_cliente }}</td>
                                         <td>{{ reclamacion.documento }}</td>
                                         <td>{{ reclamacion.bienContratado }}</td>
                                         <td>{{ reclamacion.descripcion }}</td>
                                         <td>{{ reclamacion.detalleReclamo }}</td>
-                                        <td>{{ reclamacion.detalle }}</td>
+                                        {% if reclamacion.estado == 1 %}
+                                            <td>
+                                                <h6> <span class="badge badge-success">RESPONDIDO</span></h6>
+                                            </td>
+                                            {% else %}
+                                                <td>
+                                                    <h6> <span class="badge badge-info">PENDIENTE</span></h6>
+                                                </td>
+                                        {% endif %}
                                         <td>
-                                            <a class="btn btn-primary" href="{{ path('reclamacion_edit', {'id': reclamacion.id}) }}">
+                                            <a class="btn btn-warning" href="{{ path('reclamacion_responder', {'id': reclamacion.id}) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                             <a class="btn btn-primary" href="{{ path('reclamacion_show', {'id': reclamacion.id}) }}">

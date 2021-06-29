@@ -1,64 +1,102 @@
 {% extends 'admin/bars.html.twig' %}
 
 {% block contenpage %}
-    <h1>Reclamacion</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reclamacion.id }}</td>
-            </tr>
-            <tr>
-                <th>Fecha</th>
-                <td>{{ reclamacion.fecha ? reclamacion.fecha|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Nombres</th>
-                <td>{{ reclamacion.nombres }}</td>
-            </tr>
-            <tr>
-                <th>Apellido_paterno</th>
-                <td>{{ reclamacion.apellidoPaterno }}</td>
-            </tr>
-            <tr>
-                <th>Apellido_materno</th>
-                <td>{{ reclamacion.apellidoMaterno }}</td>
-            </tr>
-            <tr>
-                <th>Tipo_documento</th>
-                <td>{{ reclamacion.tipoDocumento }}</td>
-            </tr>
-            <tr>
-                <th>Documento</th>
-                <td>{{ reclamacion.documento }}</td>
-            </tr>
-            <tr>
-                <th>Bien_contratado</th>
-                <td>{{ reclamacion.bienContratado }}</td>
-            </tr>
-            <tr>
-                <th>Descripcion</th>
-                <td>{{ reclamacion.descripcion }}</td>
-            </tr>
-            <tr>
-                <th>Detalle_reclamo</th>
-                <td>{{ reclamacion.detalleReclamo }}</td>
-            </tr>
-            <tr>
-                <th>Detalle</th>
-                <td>{{ reclamacion.detalle }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h5><a href="{{ path('reclamacion_index')}}">Lista de reclamaciones</a> >> Editar reclamo </h5>
+        </div>
+    </div>
 
-    <a href="{{ path('reclamacion_index') }}">back to list</a>
+    <div class="clearfix"></div>
 
-    <a href="{{ path('reclamacion_edit', {'id': reclamacion.id}) }}">edit</a>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Registrar nuevo reclamo</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                   
+                        <div class="x_panel col-md-12">
+                            <div class="x_title">
+                                <h2>Datos Personales del reclamante</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-8">
 
-    {{ include('reclamacion/_delete_form.html.twig') }}
-{% endblock %}
+                                <div  class="col-md-4">
+                                   {{reclamo.tipoDocumento}}
+                                   {{reclamo.documento}}
+                                </div>
+                                <div class="col-md-8">
+                                   {{reclamo.nombres}}
+                                    <div  class="col-md-6">
+                                       {{reclamo.apellidoPaterno}}
+                                    </div>
+                                    <div class="col-md-6">
+                                       {{reclamo.apellidoMaterno}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div  class="col-md-12">
+                                   {{reclamo.email}}
+                                </div>
+                                <div class="col-md-12">
+                                   {{reclamo.celular}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="x_panel col-md-12">
+                            <div class="x_title">
+                                <h2>Identificación del bien o servicio contratado</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4">
+                               {{reclamo.bienContratado}}
+                            </div>
+                            <div class="col-md-8">
+                               {{reclamo.descripcion}}
+
+                            </div>
+                        </div>
+                        <div class="x_panel col-md-12">
+                            <div class="x_title">
+                                <h2>Detalle de la reclamación</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4">
+                               {{reclamo.detalleReclamo}}
+                            </div>
+                            <div class="col-md-8">
+                               {{reclamo.detalle}}
+                                <button type="submit" name="valider" class="btn btn-success" style="float: right"><i class="fa fa-send"></i> REGISTRAR</button>
+
+                            </div>
+
+                        </div>
+                        <div class="x_content">
+                            <div class="ln_solid"></div>
+                            <div class="item form-group" style="float: right">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-danger" href="{{ sistema.link | default("http://icit.edu.pe") | upper }}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
 {% block javascripts_footer %}
-    {{ parent() }}
-
+    {{ parent()}}
 {% endblock %}

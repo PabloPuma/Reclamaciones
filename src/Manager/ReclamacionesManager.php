@@ -17,13 +17,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class ReclamacionesManager
 {
     private $em;
+    private $tokenStorage;
 
 
 
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em,TokenStorageInterface  $tokenStorage)
     {
         $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
 
     }
 
@@ -42,6 +43,15 @@ class ReclamacionesManager
         $this->em->flush();
     }
     public function updateReclamacion(Reclamacion  $reclamacion){
+        $this->em->persist($reclamacion);
+        $this->em->flush();
+    }
+    public function addRepuesta(Reclamacion  $reclamacion){
+        $reclamacion->setFechaRespuesta(new \DateTime());
+        /** @var Usuario $usuario */
+        $usuario = $this->tokenStorage->getToken()->getUser();
+        $reclamacion->setSupervisor($usuario);
+        $reclamacion->setEstado(true);
         $this->em->persist($reclamacion);
         $this->em->flush();
     }
