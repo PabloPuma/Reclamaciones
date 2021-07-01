@@ -20,6 +20,9 @@
                             <li><a href="{{ path('app_usuarios.index') }}"><i class="fa fa-user"></i> Usuarios </a></li>
                         {% endif %}
                         <li><a href="{{ path('reclamacion_index') }}"><i class="fa fa-book"></i> Reclamaciones </a></li>
+                        {% if is_granted("ROLE_COORDINADOR") %}
+                            <li><a href="{{ path('setting_index') }}"><i class="fa fa-sun-o"></i> Setting </a></li>
+                        {% endif %}
                     </ul>
                 </div>
 

@@ -5,7 +5,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h5><a href="{{ path('reclamacion_index') }}">Lista de reclamaciones</a> >> Editar reclamo </h5>
+                <h5><a href="{{ path('reclamacion_index') }}">Lista reclamaciones</a> >> Responder reclamo </h5>
             </div>
         </div>
 
@@ -86,6 +86,17 @@
                                 {{ form_row(form.respuesta) }}
                                 <button class="btn btn-success">{{ button_label|default('Registrar') }}</button>
                                 {{ form_end(form) }}
+                                <div class="x_content">
+                                    <div class="ln_solid"></div>
+                                    <div class="item form-group" style="float: right">
+{#                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+
+                                            <a class="btn btn-danger" href="{{ path('reclamacion_index')}}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                             </div>
 
 

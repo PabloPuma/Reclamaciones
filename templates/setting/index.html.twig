@@ -1,0 +1,83 @@
+{% extends "admin/bars.html.twig" %}
+
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5>
+                    {{ project_name | upper }}
+                </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>
+                            LISTA DE SETTINGS</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                                                        <li>
+                                                            <a href="{{ path('setting_new') }}" class="btn btn-success">NUEVO</a>
+                                                        </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+
+                            <table id="listaReclamaciones" class="display table table-striped table-bordered dataminetables">
+                                <thead>
+                                <th>N°</th>
+                                <th width="15%">Nombre_proyecto</th>
+                                <th>Pagina_web</th>
+                                <th>Favicon</th>
+                                <th width="30%">Logo</th>
+                                <th width="15%">acciones</th>
+                                </thead>
+                                <tbody>
+                                {% for setting in settings %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ setting.nombreProyecto }}</td>
+                                        <td>{{ setting.paginaWeb }}</td>
+                                        <td>{{ setting.favicon }}</td>
+                                        <td>{{ setting.logo }}</td>
+                                        <td>
+                                            <a class="btn btn-warning" href="{{ path('setting_edit', {'id': setting.id}) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-primary" href="{{ path('setting_show', {'id': setting.id}) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a>
+                                                <i{{ include('setting/_delete_form.html.twig') }}
+
+                                            </a>
+
+
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block javascripts_footer %}
+    {{ parent() }}
+    <script>
+
+    </script>
+
+{% endblock %}

@@ -5,7 +5,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h5><a href="{{ path('reclamacion_index')}}">Lista de reclamaciones</a> >> Editar reclamo </h5>
+            <h5><a href="{{ path('reclamacion_index')}}">Lista de reclamaciones</a> >> Ver reclamo </h5>
         </div>
     </div>
 
@@ -16,7 +16,7 @@
             <div class="x_panel">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Registrar nuevo reclamo</h2>
+                        <h2>RECLAMO VIRTUAL N° {{ reclamo.id }}</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -75,16 +75,41 @@
                             </div>
                             <div class="col-md-8">
                                {{reclamo.detalle}}
-                                <button type="submit" name="valider" class="btn btn-success" style="float: right"><i class="fa fa-send"></i> REGISTRAR</button>
+
 
                             </div>
 
+                        </div>
+                        <div class="x_panel col-md-12">
+                            <div class="x_title">
+                                <h2>Respuesta</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4">
+
+                                {% if reclamo.estado == 1 %}
+                                    <p>
+                                        {{reclamo.respuesta}}
+                                    </p>
+                                {% else %}
+                                        <h6> <span class="badge badge-info">PENDIENTE</span></h6>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="x_panel col-md-12">
+                            <div class="x_title">
+                                <h2>Operador</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="col-md-4">
+                                {{ reclamo.supervisor.NombreCompletoApellidosPrimero | default("--") }}
+                            </div>
                         </div>
                         <div class="x_content">
                             <div class="ln_solid"></div>
                             <div class="item form-group" style="float: right">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <a class="btn btn-danger" href="{{ sistema.link | default("http://icit.edu.pe") | upper }}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
+                                    <a class="btn btn-danger" href="{{ path('reclamacion_index')}}"><i class="fa fa-arrow-left"></i> REGRESAR</a>
                                 </div>
                             </div>
                            

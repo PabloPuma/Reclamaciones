@@ -140,7 +140,7 @@ class Reclamacion
         $this->estado = Reclamacion::PENDIENTE;
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -150,120 +150,120 @@ class Reclamacion
         return $this->getApellidoPaterno() . " " . $this->getApellidoMaterno() . ", " . $this->getNombres();
     }
 
-    public function getFechaRegistro(): ?\DateTimeInterface
+    public function getFechaRegistro()
     {
         return $this->fecha_registro;
     }
 
-    public function setFechaRegistro(\DateTimeInterface $fecha): self
+    public function setFechaRegistro( $fecha)
     {
         $this->fecha_registro = $fecha;
 
         return $this;
     }
 
-    public function getNombres(): ?string
+    public function getNombres()
     {
         return $this->nombres;
     }
 
-    public function setNombres(string $nombres): self
+    public function setNombres(string $nombres)
     {
         $this->nombres = $nombres;
 
         return $this;
     }
 
-    public function getApellidoPaterno(): ?string
+    public function getApellidoPaterno()
     {
         return $this->apellido_paterno;
     }
 
-    public function setApellidoPaterno(string $apellido_paterno): self
+    public function setApellidoPaterno(string $apellido_paterno)
     {
         $this->apellido_paterno = $apellido_paterno;
 
         return $this;
     }
 
-    public function getApellidoMaterno(): ?string
+    public function getApellidoMaterno()
     {
         return $this->apellido_materno;
     }
 
-    public function setApellidoMaterno(string $apellido_materno): self
+    public function setApellidoMaterno(string $apellido_materno)
     {
         $this->apellido_materno = $apellido_materno;
 
         return $this;
     }
 
-    public function getTipoDocumento(): ?string
+    public function getTipoDocumento()
     {
         return $this->tipo_documento;
     }
 
-    public function setTipoDocumento(string $tipo_documento): self
+    public function setTipoDocumento(string $tipo_documento)
     {
         $this->tipo_documento = $tipo_documento;
 
         return $this;
     }
 
-    public function getDocumento(): ?string
+    public function getDocumento()
     {
         return $this->documento;
     }
 
-    public function setDocumento(string $documento): self
+    public function setDocumento(string $documento)
     {
         $this->documento = $documento;
 
         return $this;
     }
 
-    public function getBienContratado(): ?string
+    public function getBienContratado()
     {
         return $this->bien_contratado;
     }
 
-    public function setBienContratado(string $bien_contratado): self
+    public function setBienContratado(string $bien_contratado)
     {
         $this->bien_contratado = $bien_contratado;
 
         return $this;
     }
 
-    public function getDescripcion(): ?string
+    public function getDescripcion()
     {
         return $this->descripcion;
     }
 
-    public function setDescripcion(string $descripcion): self
+    public function setDescripcion(string $descripcion)
     {
         $this->descripcion = $descripcion;
 
         return $this;
     }
 
-    public function getDetalleReclamo(): ?string
+    public function getDetalleReclamo()
     {
         return $this->detalle_reclamo;
     }
 
-    public function setDetalleReclamo(string $detalle_reclamo): self
+    public function setDetalleReclamo(string $detalle_reclamo)
     {
         $this->detalle_reclamo = $detalle_reclamo;
 
         return $this;
     }
 
-    public function getDetalle(): ?string
+    public function getDetalle()
     {
         return $this->detalle;
     }
 
-    public function setDetalle(string $detalle): self
+    public function setDetalle(string $detalle)
     {
         $this->detalle = $detalle;
 
@@ -337,7 +337,7 @@ class Reclamacion
     /**
      * @return Usuario
      */
-    public function getSupervisor(): Usuario
+    public function getSupervisor()
     {
         return $this->supervisor;
     }
